@@ -1,3 +1,5 @@
+<!doctype html>
+<meta charset=utf-8>
 <h1>Mini Pixel Font Generator</h1>
 Font size: <input id=fontsize value=30 size=2> / Chars: <input id=start value=32 size=2> - <input id=end value=127 size=2> / Font: <input id=font value=Arial size=6> <button id=go>GO</button>
 <br>
@@ -20,7 +22,6 @@ go.onclick = () => {
         c.textAlign = "center";
         c.fillText(String.fromCodePoint(ch), a.width / 2 + .5, a.height / 2 + a.height / 8 + .5);
         d = c.getImageData(0, 0, a.width, a.height);
-
         for(y = 0; y < a.height; y++){
           for(x = 0; x < a.width; x++){
             if(d.data[4 * a.width * y + 4 * x] || d.data[4 * a.width * y + 4 * x + 1] || d.data[4 * a.width * y + 4 * x + 2] || d.data[4 * a.width * y + 4 * x + 3]){
