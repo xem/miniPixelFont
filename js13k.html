@@ -1,33 +1,46 @@
-﻿<canvas id=a style='background:linear-gradient(orange,lightblue 70%)' width=1000 height=128></canvas>
+﻿<h2>MiniPixelFont</h2>
+<br>
+Text: <input id=t value="Hello JS13k!">
+<p>
+Font: <input id=f value="16px Arial">
+<p>
+Threshold: <input id=th type=range min=0 max=255 value=50>
+<br>
+<br>
 
-<canvas id=b hidden width=250 height=32 style="border:1px solid"></canvas>
-
-
+<canvas id=a style='background:linear-gradient(orange,lightblue 70%)' width=1000 height=180></canvas>
+<canvas hidden id=b width=250 height=32 style="border:1px solid"></canvas>
 <script>
-/* customize here*/
-text="ABCDEFGHabcdefgh012345&!?#";
-font="16px Arial";
-threshold = 50;
 
-/* Init */
-c=a.getContext("2d");
-d=b.getContext("2d");
+onload = onchange = oninput = () => {
 
-/* Compute and draw */
-d.font=font;
-d.textBaseline="middle";
-d.fillText(text,0,16);
-I=d.getImageData(0,0,250,32);
-for(i=0;i<250;i++){
-  for(j=0;j<32;j++){
-    if(
-      I.data[(j*250+i)*4+1]>threshold
-      ||I.data[(j*250+i)*4+2]>threshold
-      ||I.data[(j*250+i)*4+3]>threshold
-    ){
-      d.fillRect(i,j,1,1);
-      c.fillRect(i*4,j*4,4,4);
+  text=t.value;
+  font=f.value;
+  threshold = th.value;
+
+  /* Init */
+  a.width^=0;
+  b.width^=0;
+  c=a.getContext("2d");
+  d=b.getContext("2d");
+
+  /* Compute and draw */
+  d.font=font;
+  d.textBaseline="middle";
+  d.fillText(text,0,16);
+  I=d.getImageData(0,0,250,32);
+  for(i=0;i<250;i++){
+    for(j=0;j<32;j++){
+      if(
+        I.data[(j*250+i)*4+1]>threshold
+        ||I.data[(j*250+i)*4+2]>threshold
+        ||I.data[(j*250+i)*4+3]>threshold
+      ){
+        d.fillRect(i,j,1,1);
+        c.fillRect(i*6,j*6,6,6);
+      }
     }
-  }
+}
+
 }
 </script>
