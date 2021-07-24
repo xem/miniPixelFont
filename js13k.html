@@ -1,0 +1,33 @@
+﻿<canvas id=a style='background:linear-gradient(orange,lightblue 70%)' width=1000 height=128></canvas>
+
+<canvas id=b hidden width=250 height=32 style="border:1px solid"></canvas>
+
+
+<script>
+/* customize here*/
+text="ABCDEFGHabcdefgh012345&!?#";
+font="16px Arial";
+threshold = 50;
+
+/* Init */
+c=a.getContext("2d");
+d=b.getContext("2d");
+
+/* Compute and draw */
+d.font=font;
+d.textBaseline="middle";
+d.fillText(text,0,16);
+I=d.getImageData(0,0,250,32);
+for(i=0;i<250;i++){
+  for(j=0;j<32;j++){
+    if(
+      I.data[(j*250+i)*4+1]>threshold
+      ||I.data[(j*250+i)*4+2]>threshold
+      ||I.data[(j*250+i)*4+3]>threshold
+    ){
+      d.fillRect(i,j,1,1);
+      c.fillRect(i*4,j*4,4,4);
+    }
+  }
+}
+</script>
